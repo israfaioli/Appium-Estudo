@@ -10,6 +10,8 @@ import org.openqa.selenium.Dimension;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 
 public class BasePage {
 
@@ -52,7 +54,7 @@ public class BasePage {
 	}
 	
 	public void tap(int x, int y) {
-		new TouchAction(getDriver()).tap(x, y).perform();
+		new TouchAction<>(getDriver()).tap(PointOption.point(x,y)).perform();
 	}
 	
 	public void scrollDown(){
@@ -79,10 +81,10 @@ public class BasePage {
 		int start_y = (int) (size.height * inicio);
 		int end_y = (int) (size.height * fim);
 		
-		new TouchAction(getDriver())
-			.press(x, start_y)
-			.waitAction(Duration.ofMillis(500))
-			.moveTo(x, end_y)
+		new TouchAction<>(getDriver())
+			.press(PointOption.point(x, start_y))
+			.waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+			.moveTo(PointOption.point(x, end_y))
 			.release()
 			.perform();
 	}
@@ -95,10 +97,10 @@ public class BasePage {
 		int start_x = (int) (size.width * inicio);
 		int end_x = (int) (size.width * fim);
 		
-		new TouchAction(getDriver())
-		.press(start_x, y)
-		.waitAction(Duration.ofMillis(500))
-		.moveTo(end_x, y)
+		new TouchAction<>(getDriver())
+		.press(PointOption.point(start_x, y))
+		.waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+		.moveTo(PointOption.point(end_x, y))
 		.release()
 		.perform();
 	}
@@ -110,17 +112,17 @@ public class BasePage {
 		int start_x = (int) (element.getSize().width * inicio);
 		int end_x = (int) (element.getSize().width * fim);
 		
-		new TouchAction(getDriver())
-		.press(start_x, y)
-		.waitAction(Duration.ofMillis(500))
-		.moveTo(end_x, y)
+		new TouchAction<>(getDriver())
+		.press(PointOption.point(start_x, y))
+		.waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+		.moveTo(PointOption.point(end_x, y))
 		.release()
 		.perform();
 	}
 	
 	public void cliqueLongo(By by) {
-		new TouchAction(getDriver())
-		.longPress(getDriver().findElement(by))
+		new TouchAction<>(getDriver())
+		.longPress(PointOption.point(getDriver().findElement(by).getCenter()))
 		.perform();
 	}
 }

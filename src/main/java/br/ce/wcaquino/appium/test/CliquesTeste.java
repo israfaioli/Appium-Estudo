@@ -1,7 +1,7 @@
 package br.ce.wcaquino.appium.test;
 
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.ce.wcaquino.appium.core.BaseTest;
@@ -10,11 +10,11 @@ import br.ce.wcaquino.appium.page.MenuPage;
 
 public class CliquesTeste extends BaseTest {
 
-	private MenuPage menu = new MenuPage();
+	private static MenuPage menu = new MenuPage();
 	private CliquesPage page = new CliquesPage();
 	
-	@Before
-	public void setup(){
+	@BeforeClass
+	public static void setup(){
 		menu.acessarCliques();
 	}
 	
